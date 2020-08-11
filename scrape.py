@@ -1,20 +1,10 @@
+import requests
 from bs4 import BeautifulSoup
 
-html_doc = """
-<html><head><title>The Dormouse's story</title></head>
-<body>
-<p class="title"><b>The Dormouse's story</b></p>
+hiroshi_res = requests.get('http://abehiroshi.la.coocan.jp/')
+hiroshi_res.encoding = 'shift_jis'
 
-<p class="story">Once upon a time there were three little sisters; and their names were
-<a href="http://example.com/elsie" class="sister" id="link1">Elsie</a>,
-<a href="http://example.com/lacie" class="sister" id="link2">Lacie</a> and
-<a href="http://example.com/tillie" class="sister" id="link3">Tillie</a>;
-and they lived at the bottom of a well.</p>
+hiroshi_html = BeautifulSoup(hiroshi_res.text, 'html.parser')
 
-<p class="story">...</p>
-"""
-
-soup = BeautifulSoup(html_doc, 'html.parser')
-
-print(soup.prettify())
-print(soup.title)
+title = str(hiroshi_html.title.string)
+print(title)
