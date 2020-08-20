@@ -2,22 +2,21 @@ import requests
 from bs4 import BeautifulSoup
 import cv2
 
-hiroshi_site_url = 'http://abehiroshi.la.coocan.jp/top.htm'
-hiroshi_res = requests.get(hiroshi_site_url)
-hiroshi_res.encoding = 'shift_jis'
 
-hiroshi_html = BeautifulSoup(hiroshi_res.text, 'html.parser')
+def get_html(url, encode):
+    res = requests.get(url)
+    res.encoding = encode
+    html = BeautifulSoup(res.text, 'html.parser')
+    return html
 
-hiroshi_img_path = hiroshi_html.find('img')['src']
 
-download_file_to_dir()
+url = 'http://abehiroshi.la.coocan.jp/top.htm'
+html = get_html(url, 'shift-jis')
+img_path = html.find('img')['src']
 
-# 画像をダウンロード
-hiroshi_img = cv2.imread('http://abehiroshi.la.coocan.jp/abe-top-20190328-2.jpg')
+img = requests.get('http://abehiroshi.la.coocan.jp/' + img_path)
 
-cv2.imshow('阿部寛のご尊顔', hiroshi_img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+print(img_path)
 
 # やること
 # 画像をrequestとか使ってローカルに落とす
