@@ -3,11 +3,12 @@ from bs4 import BeautifulSoup
 import cv2
 
 
-def get_html(url, encode):
-    res = requests.get(url)
+def get_soup(url, encode):
+    ua = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'
+    res = requests.get(url, headers={'User-Agent': ua})
     res.encoding = encode
-    html = BeautifulSoup(res.text, 'html.parser')
-    return html
+    soup = BeautifulSoup(res.text, 'html.parser')
+    return soup
 
 
 def download_img(url, path):
@@ -25,14 +26,10 @@ def show_img(file_path, window_name):
     cv2.destroyAllWindows()
 
 
-url = 'http://abehiroshi.la.coocan.jp/top.htm'
-html = get_html(url, 'shift-jis')
-img_file_name = html.find('img')['src']
+base_url = 'https://www.instagram.com/explore/tags/'
+keyword = input('Enter keyword of images -->')
 
-# TODO pathlibで置換する、imgのurlをもっときれいに取得する
-download_img('http://abehiroshi.la.coocan.jp/' + img_file_name,
-             'img/' + img_file_name)
+soup = get_soup(base_url + keyword, 'utf-8')
+js_scripts = soup.select('script[type="text/javascript"]')
 
-show_img('img/' + img_file_name, 'Abe hiroshi\'s face')
-
-# できればopenCVで表示させる
+print(js_scripts)
