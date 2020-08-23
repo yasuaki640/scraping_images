@@ -18,15 +18,21 @@ def download_img(url, path):
         print('Value error occured')
 
 
+def show_img(file_path, window_name):
+    img = cv2.imread(file_path)
+    cv2.imshow(window_name, img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
 url = 'http://abehiroshi.la.coocan.jp/top.htm'
 html = get_html(url, 'shift-jis')
-img_url = html.find('img')['src']
+img_file_name = html.find('img')['src']
 
-download_img('http://abehiroshi.la.coocan.jp/abe-top-20190328-2.jpg',
-             'C:/Users/yasua/PycharmProjects/scraping_images/img/abe_hiroshi.jpg')
+# TODO pathlibで置換する、imgのurlをもっときれいに取得する
+download_img('http://abehiroshi.la.coocan.jp/' + img_file_name,
+             'img/' + img_file_name)
 
-print(img_url)
+show_img('img/' + img_file_name, 'Abe hiroshi\'s face')
 
-# やること
-# 画像をrequestとか使ってローカルに落とす
 # できればopenCVで表示させる
