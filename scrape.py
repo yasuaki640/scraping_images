@@ -26,10 +26,19 @@ def show_img(file_path, window_name):
     cv2.destroyAllWindows()
 
 
+def get_jpg_jsons(js_scripts):
+    jpg_jsons = []
+    for script in js_scripts:
+        if '.jpg' in str(script):
+            jpg_jsons.append(str(script))
+    return jpg_jsons
+
+
 base_url = 'https://www.instagram.com/explore/tags/'
 keyword = input('Enter keyword of images -->')
 
 soup = get_soup(base_url + keyword, 'utf-8')
 js_scripts = soup.select('script[type="text/javascript"]')
+jpg_jsons = get_jpg_jsons(js_scripts)
 
-print(js_scripts)
+print(jpg_jsons)
