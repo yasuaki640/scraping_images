@@ -41,4 +41,5 @@ soup = get_soup(base_url + keyword, 'utf-8')
 js_scripts = soup.select('script[type="text/javascript"]')
 jpg_jsons = get_jpg_jsons(js_scripts)
 
-print(jpg_jsons)
+with open('ImgPaths.js', 'a') as js_file:
+    js_file.write(jpg_jsons[0])
