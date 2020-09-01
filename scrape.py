@@ -42,4 +42,5 @@ js_scripts = soup.select('script[type="text/javascript"]')
 jpg_jsons = get_jpg_jsons(js_scripts)
 
 with open('url_output/img_paths.json', 'w') as js_file:
-    js_file.write(jpg_jsons[0])
+    jpg_json = jpg_jsons[0].strip('<script type="text/javascript">window._sharedData = ').strip(';</script>')
+    js_file.write(jpg_json)
