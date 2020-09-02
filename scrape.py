@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import json
 import cv2
 
 
@@ -44,3 +45,8 @@ jpg_jsons = get_jpg_jsons(js_scripts)
 with open('url_output/img_paths.json', 'w') as js_file:
     jpg_json = jpg_jsons[0].strip('<script type="text/javascript">window._sharedData = ').strip(';</script>')
     js_file.write(jpg_json)
+
+with open('url_output/img_paths.json', 'r') as json_file:
+    img_path_json = json.load(json_file)
+    display_urls = img_path_json.get('entry_data')
+    print(display_urls)
