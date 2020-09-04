@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import codecs
 import cv2
+import re
 
 
 def get_soup(url, encode):
@@ -34,6 +35,18 @@ def get_jpg_jsons(js_scripts):
         if '.jpg' in str(script):
             jpg_jsons.append(str(script))
     return jpg_jsons
+
+
+def extract_text_in_file(filepath, pattern_prev, pattern_next):
+    extracted_text_array = []
+    pattern = pattern_prev + '(.*)' + pattern_next
+    with open(filepath) as f:
+        lines = f.readlines()
+        for line in lines:
+            tmp_extracted_text_array = re.findall(pattern, line)
+            extracted_text_array.extend(tmp_extracted_text_array)
+
+    return extracted_text_array
 
 
 base_url = 'https://www.instagram.com/explore/tags/'
