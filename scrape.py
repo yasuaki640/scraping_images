@@ -1,9 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 import json
-import codecs
+
 import cv2
-import re
 
 
 def get_soup(url, encode):
@@ -12,14 +11,6 @@ def get_soup(url, encode):
     res.encoding = encode
     soup = BeautifulSoup(res.text, 'html.parser')
     return soup
-
-
-def download_img(url, path):
-    try:
-        img = requests.get(url)
-        open(path, 'wb').write(img.content)
-    except ValueError:
-        print('Value error occured')
 
 
 def show_img(file_path, window_name):
@@ -35,18 +26,6 @@ def get_jpg_jsons(js_scripts):
         if '.jpg' in str(script):
             jpg_jsons.append(str(script))
     return jpg_jsons
-
-
-def extract_text_in_file(filepath, pattern_prev, pattern_next):
-    extracted_text_array = []
-    pattern = pattern_prev + '(.*)' + pattern_next
-    with open(filepath) as f:
-        lines = f.readlines()
-        for line in lines:
-            tmp_extracted_text_array = re.findall(pattern, line)
-            extracted_text_array.extend(tmp_extracted_text_array)
-
-    return extracted_text_array
 
 
 base_url = 'https://www.instagram.com/explore/tags/'
@@ -65,6 +44,3 @@ with open('url_output/img_paths.json', 'r') as json_file:
 
 with open('url_output/img_paths_formatted.json', 'w') as f:
     json.dump(img_path_json, f, ensure_ascii=True, indent=4, separators=(',', ': '))
-
-
-
