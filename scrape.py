@@ -62,5 +62,9 @@ with open('url_output/img_paths.json', 'w') as js_file:
 
 with open('url_output/img_paths.json', 'r') as json_file:
     img_path_json = json.load(json_file)
-    display_urls = img_path_json.get('entry_data')
-    print(display_urls)
+
+with open('url_output/img_paths_formatted.json', 'w') as f:
+    json.dump(img_path_json, f, ensure_ascii=True, indent=4, separators=(',', ': '))
+
+
+
