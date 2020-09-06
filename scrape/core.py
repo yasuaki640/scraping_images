@@ -13,19 +13,19 @@ def main():
     js_scripts = soup.select('script[type="text/javascript"]')
     jpg_jsons = get_jpg_jsons(js_scripts)
 
-    json_file_path = '../url_output/img_paths.json'
-    formatted_json_file_path = '../url_output/img_paths_formatted.json'
+    JSON_FILE_PATH = '../url_output/img_paths.json'
+    FORMATTED_JSON_FILE_PATH = '../url_output/img_paths_formatted.json'
 
-    with open(json_file_path, 'w') as js_file:
+    with open(JSON_FILE_PATH, 'w') as js_file:
         jpg_json = jpg_jsons[0].strip('<script type="text/javascript">window._sharedData = ').strip(';</script>')
         js_file.write(jpg_json)
 
-    with open(json_file_path, 'r') as json_file:
+    with open(JSON_FILE_PATH, 'r') as json_file:
         img_path_json = json.load(json_file)
-        with open(formatted_json_file_path, 'w') as formatted_json_file:
+        with open(FORMATTED_JSON_FILE_PATH, 'w') as formatted_json_file:
             json.dump(img_path_json, formatted_json_file, ensure_ascii=True, indent=4, separators=(',', ': '))
 
-    img_urls = extract_text_in_file(formatted_json_file_path, '"display_url": "', '",')
+    img_urls = extract_text_in_file(FORMATTED_JSON_FILE_PATH, '"display_url": "', '",')
     for url in img_urls:
         print(url)
 
