@@ -16,14 +16,7 @@ def main():
     JSON_FILE_PATH = '../url_output/img_paths.json'
     FORMATTED_JSON_FILE_PATH = '../url_output/img_paths_formatted.json'
 
-    with open(JSON_FILE_PATH, 'w') as js_file:
-        jpg_json = jpg_jsons[0].strip('<script type="text/javascript">window._sharedData = ').strip(';</script>')
-        js_file.write(jpg_json)
-
-    with open(JSON_FILE_PATH, 'r') as json_file:
-        img_path_json = json.load(json_file)
-        with open(FORMATTED_JSON_FILE_PATH, 'w') as formatted_json_file:
-            json.dump(img_path_json, formatted_json_file, ensure_ascii=True, indent=4, separators=(',', ': '))
+    format_json_file(jpg_jsons, JSON_FILE_PATH, FORMATTED_JSON_FILE_PATH)
 
     img_urls = extract_text_in_file(FORMATTED_JSON_FILE_PATH, '"display_url": "', '",')
     for url in img_urls:
@@ -63,6 +56,17 @@ def extract_text_in_file(filepath, pattern_prev, pattern_next):
             extracted_text_array.extend(tmp_extracted_text_array)
 
     return extracted_text_array
+
+
+def format_json_file(jpg_jsons, json_file_path, formatted_json_file_path):
+    with open(json_file_path, 'w') as js_file:
+        jpg_json = jpg_jsons[0].strip('<script type="text/javascript">window._sharedData = ').strip(';</script>')
+        js_file.write(jpg_json)
+
+    with open(json_file_path, 'r') as json_file:
+        img_path_json = json.load(json_file)
+        with open(formatted_json_file_path, 'w') as formatted_json_file:
+            json.dump(img_path_json, formatted_json_file, ensure_ascii=True, indent=4, separators=(',', ': '))
 
 
 if __name__ == '__main__':
