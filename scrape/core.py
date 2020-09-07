@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import re
 import cv2
+import sys, traceback
 
 
 def main():
@@ -19,6 +20,7 @@ def main():
     format_json_file(jpg_jsons, JSON_FILE_PATH, FORMATTED_JSON_FILE_PATH)
 
     img_urls = extract_text_in_file(FORMATTED_JSON_FILE_PATH, '"display_url": "', '",')
+
     for url in img_urls:
         print(url)
 
@@ -67,6 +69,15 @@ def format_json_file(jpg_jsons, json_file_path, formatted_json_file_path):
         img_path_json = json.load(json_file)
         with open(formatted_json_file_path, 'w') as formatted_json_file:
             json.dump(img_path_json, formatted_json_file, ensure_ascii=True, indent=4, separators=(',', ': '))
+
+
+def download_img(url, path):
+    try:
+        img = requests.get(url)
+        open(path, 'wb').write(img.content)
+    except ValueError:
+        print('Value error occured')
+        traceback.print_exc(file=sys.stdout)
 
 
 if __name__ == '__main__':
