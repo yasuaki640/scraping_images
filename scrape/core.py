@@ -22,7 +22,12 @@ def main():
     img_urls = extract_text_in_file(FORMATTED_JSON_FILE_PATH, '"display_url": "', '",')
 
     for i, url in enumerate(img_urls):
-        download_img(url, '../img/' + keyword + '_' + str(i) + '.jpg')
+        file_name = keyword + '_' + str(i) + '.jpg'
+        path = '../img/' + file_name
+        download_img(url, path)
+        print(file_name + ' downloaded.')
+
+    print(str(len(img_urls)) + ' images downloaded')
 
 
 def get_soup(url, encode):
