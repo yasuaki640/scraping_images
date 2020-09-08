@@ -1,34 +1,8 @@
-## 機能概要
+# A tool for scraping imgs 
+This tool is made for download img by keyword searching from inst\*gr\*m.  
+It's prohibited to scrape from inst\*gr\*m so if you want to use this tool,  
+I will not bear any responsibility whatsoever.
 
-instagramにログイン
-
-ユーザーが指定したkeywordをもとに検索をかける。
-
-表示された任意の画像を保存する。
-
-できればFWに組み込み、WEBサービスとして公開する。
-
-
-
-### Phase 1 (~8/16)
-
-~~単純なスクレイピング~~
-
-~~画像の保存~~
-
-完了（8/23）
-
-
-
-### Phase2 (~8/29)
-
-keywordをもとに任意の画像を保存
-
-
-
-### Phase3 (~9/12)
-
-Instagramログイン実装
-
-任意のハッシュタグの画像を検索し保存
-
+## Usage
+`python -m scrape.core`  
+`Enter keyword of images --> [keyword of image that you want]`  
