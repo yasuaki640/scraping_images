@@ -35,6 +35,7 @@ def get_soup(url, encode):
 
 def get_jpg_jsons(js_scripts):
     jpg_jsons = []
+
     for script in js_scripts:
         if '.jpg' in str(script):
             jpg_jsons.append(str(script))
@@ -44,6 +45,7 @@ def get_jpg_jsons(js_scripts):
 def extract_text_in_file(filepath, pattern_prev, pattern_next):
     extracted_text_array = []
     pattern = pattern_prev + '(.*)' + pattern_next
+
     with open(filepath) as f:
         lines = f.readlines()
         for line in lines:
@@ -60,8 +62,9 @@ def format_json_file(jpg_jsons, json_file_path, formatted_json_file_path):
 
     with open(json_file_path, 'r') as json_file:
         img_path_json = json.load(json_file)
-        with open(formatted_json_file_path, 'w') as formatted_json_file:
-            json.dump(img_path_json, formatted_json_file, ensure_ascii=True, indent=4, separators=(',', ': '))
+
+    with open(formatted_json_file_path, 'w') as formatted_json_file:
+        json.dump(img_path_json, formatted_json_file, ensure_ascii=True, indent=4, separators=(',', ': '))
 
 
 def download_imgs(keyword, img_urls):
