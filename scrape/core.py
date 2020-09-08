@@ -21,13 +21,7 @@ def main():
     format_json_file(jpg_jsons, JSON_FILE_PATH, FORMATTED_JSON_FILE_PATH)
 
     img_urls = extract_text_in_file(FORMATTED_JSON_FILE_PATH, '"display_url": "', '",')
-
-    for i, url in enumerate(img_urls):
-        file_name = keyword + '_' + str(i) + '.jpg'
-        path = '../img/' + file_name
-        download_img(url, path)
-        print(file_name + ' downloaded.')
-
+    download_imgs(keyword, img_urls)
     print(str(len(img_urls)) + ' images downloaded')
 
 
@@ -70,13 +64,18 @@ def format_json_file(jpg_jsons, json_file_path, formatted_json_file_path):
             json.dump(img_path_json, formatted_json_file, ensure_ascii=True, indent=4, separators=(',', ': '))
 
 
-def download_img(url, path):
-    try:
-        img = requests.get(url)
-        open(path, 'wb').write(img.content)
-    except ValueError:
-        print('Value error occured')
-        traceback.print_exc(file=sys.stdout)
+def download_imgs(keyword, img_urls):
+    for i, url in enumerate(img_urls):
+        file_name = keyword + '_' + str(i) + '.jpg'
+        path = '../img/' + file_name
+
+        try:
+            img = requests.get(url)
+            open(path, 'wb').write(img.content)
+        except ValueError:
+            traceback.print_exc(file=sys.stdout)
+
+        print(file_name + ' downloaded.')
 
 
 if __name__ == '__main__':
