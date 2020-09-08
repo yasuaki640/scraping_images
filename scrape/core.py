@@ -1,9 +1,10 @@
-import requests
-from bs4 import BeautifulSoup
 import json
 import re
-import cv2
-import sys, traceback
+import sys
+import traceback
+
+import requests
+from bs4 import BeautifulSoup
 
 
 def main():
@@ -36,13 +37,6 @@ def get_soup(url, encode):
     res.encoding = encode
     soup = BeautifulSoup(res.text, 'html.parser')
     return soup
-
-
-def show_img(file_path, window_name):
-    img = cv2.imread(file_path)
-    cv2.imshow(window_name, img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
 
 
 def get_jpg_jsons(js_scripts):
