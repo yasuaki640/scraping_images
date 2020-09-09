@@ -9,7 +9,11 @@ from bs4 import BeautifulSoup
 
 def main():
     base_url = 'https://www.instagram.com/explore/tags/'
-    keyword = input('Enter keyword of images -->')
+
+    while True:
+        keyword = input('Enter keyword of images -->')
+        if len(keyword) <= 0:
+            break
 
     soup = get_soup(base_url + keyword, 'utf-8')
     js_scripts = soup.select('script[type="text/javascript"]')
