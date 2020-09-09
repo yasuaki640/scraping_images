@@ -18,6 +18,10 @@ def main():
     js_scripts = soup.select('script[type="text/javascript"]')
     jpg_jsons = get_jpg_jsons(js_scripts)
 
+    if len(jpg_jsons) <= 0:
+        print('No image found.')
+        return
+
     JSON_FILE_PATH = '../url_output/img_paths.json'
     FORMATTED_JSON_FILE_PATH = '../url_output/img_paths_formatted.json'
 
