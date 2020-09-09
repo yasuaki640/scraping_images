@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 def main():
     while True:
         keyword = input('Enter keyword of images -->')
-        if len(keyword) <= 0:
+        if len(keyword) > 0:
             break
 
     BASE_URL = 'https://www.instagram.com/explore/tags/'
