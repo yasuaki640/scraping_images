@@ -8,14 +8,14 @@ from bs4 import BeautifulSoup
 
 
 def main():
-    base_url = 'https://www.instagram.com/explore/tags/'
+    BASE_URL = 'https://www.instagram.com/explore/tags/'
 
     while True:
         keyword = input('Enter keyword of images -->')
         if len(keyword) <= 0:
             break
 
-    soup = get_soup(base_url + keyword, 'utf-8')
+    soup = get_soup(BASE_URL + keyword, 'utf-8')
     js_scripts = soup.select('script[type="text/javascript"]')
     jpg_jsons = get_jpg_jsons(js_scripts)
 
