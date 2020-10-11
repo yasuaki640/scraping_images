@@ -64,6 +64,7 @@ def extract_str_in_file(file_path, pattern_prev, pattern_next):
 
 def format_json_file(jpg_script_tag, json_file_path, formatted_json_file_path):
     with open(json_file_path, 'w') as json_file:
+        # TODO: Treat text in tag as JS
         img_path_json = jpg_script_tag[0].strip('<script type="text/javascript">window._sharedData = ').strip(
             ';</script>')
         json_file.write(img_path_json)
