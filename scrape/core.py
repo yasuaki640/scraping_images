@@ -14,7 +14,8 @@ def main():
             break
 
     BASE_URL = 'https://www.instagram.com/explore/tags/'
-    soup = get_soup(BASE_URL + keyword, 'utf-8')
+    ENCODE = 'utf-8'
+    soup = get_soup(BASE_URL + keyword, ENCODE)
     script_tags = soup.select('script[type="text/javascript"]')
     jpg_script_tags = get_jpg_scrip_tags(script_tags)
 
