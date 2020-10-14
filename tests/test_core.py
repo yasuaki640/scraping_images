@@ -1,5 +1,7 @@
 import unittest
 
+import magicmock as Magicmock
+
 BASE_URL = 'https://www.instagram.com/explore/tags/'
 KEYWORD = '今田美桜'
 ENCODE = 'utf-8'
@@ -13,6 +15,8 @@ class GetImagesTest(unittest.TestCase):
 
     def test_get_jpg_scrip_tags(self):
         from scrape.core import get_jpg_scrip_tags
+        mock = Magicmock()
+
 
 if __name__ == '__main__':
     unittest.main()
