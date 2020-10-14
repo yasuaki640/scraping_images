@@ -12,7 +12,7 @@ class GetImagesTest(unittest.TestCase):
         self.assertEqual(True, soup.prettify().__contains__('<!DOCTYPE html>'))
 
     def test_get_jpg_scrip_tags(self):
-        from scrape.core import get_soup
+        from scrape.core import get_jpg_scrip_tags
 
 if __name__ == '__main__':
     unittest.main()
