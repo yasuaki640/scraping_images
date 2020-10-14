@@ -14,7 +14,8 @@ def main():
             break
 
     BASE_URL = 'https://www.instagram.com/explore/tags/'
-    soup = get_soup(BASE_URL + keyword, 'utf-8')
+    ENCODE = 'utf-8'
+    soup = get_soup(BASE_URL + keyword, ENCODE)
     script_tags = soup.select('script[type="text/javascript"]')
     jpg_script_tags = get_jpg_scrip_tags(script_tags)
 
@@ -64,6 +65,7 @@ def extract_str_in_file(file_path, pattern_prev, pattern_next):
 
 def format_json_file(jpg_script_tag, json_file_path, formatted_json_file_path):
     with open(json_file_path, 'w') as json_file:
+        # TODO: Treat text in tag as JS
         img_path_json = jpg_script_tag[0].strip('<script type="text/javascript">window._sharedData = ').strip(
             ';</script>')
         json_file.write(img_path_json)
