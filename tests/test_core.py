@@ -11,6 +11,7 @@ class GetImagesTest(unittest.TestCase):
         soup = get_soup(BASE_URL + '/' + KEYWORD, ENCODE)
         self.assertEqual(True, soup.prettify().__contains__('<!DOCTYPE html>'))
 
+    def test_get_jpg_scrip_tags(self):
 
 if __name__ == '__main__':
     unittest.main()
