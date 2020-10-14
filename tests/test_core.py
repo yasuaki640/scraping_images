@@ -9,7 +9,7 @@ class GetImagesTest(unittest.TestCase):
     def test_get_soup(self):
         from scrape.core import get_soup
         soup = get_soup(BASE_URL + '/' + KEYWORD, ENCODE)
-        self.assertEqual(True, False)
+        self.assertEqual(True, soup.prettify().__contains__('<!DOCTYPE html>'))
 
 
 if __name__ == '__main__':
