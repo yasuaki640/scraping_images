@@ -21,5 +21,8 @@ class GetImagesTest(unittest.TestCase):
             if tag.__contains__('.jpg'):
                 res = True
 
+        self.assertTrue(res)
+
+
 if __name__ == '__main__':
     unittest.main()
