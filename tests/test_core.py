@@ -16,6 +16,10 @@ class GetImagesTest(unittest.TestCase):
         from scrape.core import get_jpg_scrip_tags
         jpg_script_tags = get_jpg_scrip_tags(data.script_tags)
 
+        res = False
+        for tag in jpg_script_tags:
+            if tag.__contains__('.jpg'):
+                res = True
 
 if __name__ == '__main__':
     unittest.main()
