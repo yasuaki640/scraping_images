@@ -10,8 +10,7 @@ class GetImagesTest(unittest.TestCase):
     def test_get_soup(self):
         from scrape.core import get_soup
         soup = get_soup(BASE_URL + '/' + KEYWORD, ENCODE)
-        self.assertTrue(soup.prettify()
-                        .__contains__('<!DOCTYPE html>'))
+        self.assertTrue(soup.prettify().__contains__('<!DOCTYPE html>'))
 
     def test_get_jpg_scrip_tags(self):
         from scrape.core import get_jpg_scrip_tags
