@@ -1,4 +1,5 @@
 import unittest
+from tempfile import TemporaryDirectory
 import tests.data.data as data
 
 BASE_URL = 'https://www.instagram.com/explore/tags/'
