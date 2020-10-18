@@ -8,6 +8,13 @@ ENCODE = 'utf-8'
 
 
 class GetImagesTest(unittest.TestCase):
+
+    def setUp(self):
+        self.tmp_img_dir = TemporaryDirectory()
+
+    def tearDown(self):
+        self.tmp_img_dir.cleanup()
+
     def test_get_soup(self):
         from scrape.core import get_soup
         soup = get_soup(BASE_URL + '/' + KEYWORD, ENCODE)
@@ -26,6 +33,7 @@ class GetImagesTest(unittest.TestCase):
 
     def test_format_json_file(self):
         from scrape.core import format_json_file
+
 
 if __name__ == '__main__':
     unittest.main()
