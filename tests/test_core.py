@@ -24,7 +24,7 @@ class GetImagesTest(unittest.TestCase):
         self.assertTrue(contain_jpg)
 
     def test_format_json_file(self):
-        
+        from scrape.core import format_json_file
 
 if __name__ == '__main__':
     unittest.main()
