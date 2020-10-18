@@ -23,6 +23,8 @@ class GetImagesTest(unittest.TestCase):
 
         self.assertTrue(contain_jpg)
 
+    def test_format_json_file(self):
+        
 
 if __name__ == '__main__':
     unittest.main()
