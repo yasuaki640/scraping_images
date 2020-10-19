@@ -35,6 +35,7 @@ class GetImagesTest(unittest.TestCase):
         from scrape.core import format_json_file
 
     def test_download_imgs(self):
+        from scrape.core import download_imgs
 
 
 if __name__ == '__main__':
