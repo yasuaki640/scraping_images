@@ -1,3 +1,4 @@
+import pathlib
 import unittest
 from tempfile import TemporaryDirectory
 import tests.data.data as data
@@ -35,6 +36,8 @@ class GetImagesTest(unittest.TestCase):
 
     def test_format_json_file(self):
         from scrape.core import format_json_file
+        json_path = pathlib.PurePath(self.json_dir.name + '/img_paths.json')
+        formatted_json_path = pathlib.PurePath(self.json_dir.name + '/formatted_img_paths.json')
 
     def test_download_imgs(self):
         from scrape.core import download_imgs
