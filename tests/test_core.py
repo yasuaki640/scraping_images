@@ -38,6 +38,7 @@ class GetImagesTest(unittest.TestCase):
         from scrape.core import format_json_file
         json_path = pathlib.PurePath(self.json_dir.name + '/img_paths.json')
         formatted_json_path = pathlib.PurePath(self.json_dir.name + '/formatted_img_paths.json')
+        format_json_file(data.jpg_script_tags, json_path, formatted_json_path)
 
     def test_download_imgs(self):
         from scrape.core import download_imgs
