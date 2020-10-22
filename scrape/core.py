@@ -26,7 +26,8 @@ def main():
     img_url_json = get_json_contains_url(jpg_script_tags)
     img_urls = extract_str(img_url_json, '"display_url": "', '",')
 
-    count = download_imgs(keyword, img_urls)
+    DESTINATION_DIR = '../img/'
+    count = download_imgs(keyword, img_urls, DESTINATION_DIR)
     print(str(count) + ' images downloaded')
 
 
@@ -68,11 +69,11 @@ def get_json_contains_url(jpg_script_tag):
     return json.dumps(dict_data, ensure_ascii=True, indent=4)
 
 
-def download_imgs(keyword, img_urls):
+def download_imgs(keyword, img_urls, destination_dir):
     num_of_imgs = 0
     for i, url in enumerate(img_urls):
         file_name = keyword + '_' + str(i) + '.jpg'
-        path = '../img/' + file_name
+        path = destination_dir + file_name
         img = requests.get(url)
 
         with open(path, 'wb') as f:
