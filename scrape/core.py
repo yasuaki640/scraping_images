@@ -69,7 +69,7 @@ def get_json_contains_url(jpg_script_tag):
 
 
 def download_imgs(keyword, img_urls):
-    count = 0
+    num_of_imgs = 0
     for i, url in enumerate(img_urls):
         file_name = keyword + '_' + str(i) + '.jpg'
         path = '../img/' + file_name
@@ -77,10 +77,10 @@ def download_imgs(keyword, img_urls):
 
         with open(path, 'wb') as f:
             f.write(img.content)
-            count = count + 1
+            num_of_imgs = num_of_imgs + 1
             print(file_name + ' downloaded.')
 
-    return count
+    return num_of_imgs
 
 
 if __name__ == '__main__':
