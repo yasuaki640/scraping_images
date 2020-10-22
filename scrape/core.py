@@ -23,10 +23,8 @@ def main():
         print('No image found.')
         return
 
-    JSON_PATH = '../url_output/img_paths.json'
-    FORMATTED_JSON_PATH = '../url_output/img_paths_formatted.json'
 
-    format_json_file(jpg_script_tags, JSON_PATH, FORMATTED_JSON_PATH)
+    img_url_json = get_json(jpg_script_tags)
 
     img_urls = extract_str_in_file(FORMATTED_JSON_PATH, '"display_url": "', '",')
     download_imgs(keyword, img_urls)
@@ -63,18 +61,11 @@ def extract_str_in_file(file_path, pattern_prev, pattern_next):
     return extracted_strings
 
 
-def format_json_file(jpg_script_tag, json_path, formatted_json_path):
-    with open(json_path, 'w') as json_file:
-        # TODO: Treat text in tag as JS
-        img_path_json = jpg_script_tag[0].strip('<script type="text/javascript">window._sharedData = ').strip(
-            ';</script>')
-        json_file.write(img_path_json)
-
-    with open(json_path, 'r') as json_file:
-        img_path_json = json.load(json_file)
-
-    with open(formatted_json_path, 'w') as formatted_json_file:
-        json.dump(img_path_json, formatted_json_file, ensure_ascii=True, indent=4, separators=(',', ': '))
+def get_json(jpg_script_tag):
+    img_path_json_str = jpg_script_tag[0].strip('<script type="text/javascript">window._sharedData = ').strip(
+        ';</script>')
+    dict_data = json.loads(img_path_json_str)
+    return json.dumps(dict_data, ensure_ascii=True, indent=4)
 
 
 def download_imgs(keyword, img_urls):
