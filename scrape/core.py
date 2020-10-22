@@ -23,10 +23,9 @@ def main():
         print('No image found.')
         return
 
-
     img_url_json = get_json(jpg_script_tags)
 
-    img_urls = extract_str_in_file(FORMATTED_JSON_PATH, '"display_url": "', '",')
+    img_urls = extract_str(img_url_json, '"display_url": "', '",')
     download_imgs(keyword, img_urls)
     print(str(len(img_urls)) + ' images downloaded')
 
@@ -48,16 +47,13 @@ def get_jpg_scrip_tags(script_tags):
     return jpg_script_tags
 
 
-def extract_str_in_file(file_path, pattern_prev, pattern_next):
+def extract_str(original_str, pattern_prev, pattern_next):
     extracted_strings = []
     pattern = pattern_prev + '(.*)' + pattern_next
-
-    with open(file_path) as f:
-        lines = f.readlines()
-        for line in lines:
-            extracted_str = re.findall(pattern, line)
-            extracted_strings.extend(extracted_str)
-
+    str_members = original_str.splitlines()
+    for str_member in str_members:
+        extracted_str = re.findall(pattern, str_member)
+        extracted_strings.extend(extracted_str)
     return extracted_strings
 
 
