@@ -73,15 +73,12 @@ def download_imgs(keyword, img_urls):
     for i, url in enumerate(img_urls):
         file_name = keyword + '_' + str(i) + '.jpg'
         path = '../img/' + file_name
+        img = requests.get(url)
 
-        try:
-            img = requests.get(url)
-            open(path, 'wb').write(img.content)
+        with open(path, 'wb') as f:
+            f.write(img.content)
             count = count + 1
-        except ValueError:
-            traceback.print_exc(file=sys.stdout)
-
-        print(file_name + ' downloaded.')
+            print(file_name + ' downloaded.')
 
     return count
 
