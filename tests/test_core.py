@@ -15,11 +15,9 @@ class GetImagesTest(unittest.TestCase):
 
     def setUp(self):
         self.img_dir = TemporaryDirectory()
-        self.json_dir = TemporaryDirectory()
 
     def tearDown(self):
         self.img_dir.cleanup()
-        self.json_dir.cleanup()
 
     def test_get_soup(self):
         from scrape.core import get_soup
