@@ -2,7 +2,6 @@ import json
 import re
 import sys
 import traceback
-
 import requests
 from bs4 import BeautifulSoup
 
@@ -16,6 +15,7 @@ def main():
     BASE_URL = 'https://www.instagram.com/explore/tags/'
     ENCODE = 'utf-8'
     soup = get_soup(BASE_URL + keyword, ENCODE)
+
     script_tags = soup.select('script[type="text/javascript"]')
     jpg_script_tags = get_jpg_scrip_tags(script_tags)
 
@@ -23,9 +23,9 @@ def main():
         print('No image found.')
         return
 
-    img_url_json = get_json(jpg_script_tags)
-
+    img_url_json = get_json_contains_url(jpg_script_tags)
     img_urls = extract_str(img_url_json, '"display_url": "', '",')
+
     download_imgs(keyword, img_urls)
     print(str(len(img_urls)) + ' images downloaded')
 
@@ -50,17 +50,21 @@ def get_jpg_scrip_tags(script_tags):
 def extract_str(original_str, pattern_prev, pattern_next):
     extracted_strings = []
     pattern = pattern_prev + '(.*)' + pattern_next
-    str_members = original_str.splitlines()
-    for str_member in str_members:
-        extracted_str = re.findall(pattern, str_member)
+
+    members = original_str.splitlines()
+    for member in members:
+        extracted_str = re.findall(pattern, member)
         extracted_strings.extend(extracted_str)
+
     return extracted_strings
 
 
-def get_json(jpg_script_tag):
-    img_path_json_str = jpg_script_tag[0].strip('<script type="text/javascript">window._sharedData = ').strip(
-        ';</script>')
+def get_json_contains_url(jpg_script_tag):
+    img_path_json_str = jpg_script_tag[0] \
+        .strip('<script type="text/javascript">window._sharedData = ') \
+        .strip(';</script>')
     dict_data = json.loads(img_path_json_str)
+
     return json.dumps(dict_data, ensure_ascii=True, indent=4)
 
 
