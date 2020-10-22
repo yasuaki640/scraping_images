@@ -26,8 +26,8 @@ def main():
     img_url_json = get_json_contains_url(jpg_script_tags)
     img_urls = extract_str(img_url_json, '"display_url": "', '",')
 
-    download_imgs(keyword, img_urls)
-    print(str(len(img_urls)) + ' images downloaded')
+    count = download_imgs(keyword, img_urls)
+    print(str(count) + ' images downloaded')
 
 
 def get_soup(url, encode):
@@ -69,6 +69,7 @@ def get_json_contains_url(jpg_script_tag):
 
 
 def download_imgs(keyword, img_urls):
+    count = 0
     for i, url in enumerate(img_urls):
         file_name = keyword + '_' + str(i) + '.jpg'
         path = '../img/' + file_name
@@ -76,10 +77,13 @@ def download_imgs(keyword, img_urls):
         try:
             img = requests.get(url)
             open(path, 'wb').write(img.content)
+            count = count + 1
         except ValueError:
             traceback.print_exc(file=sys.stdout)
 
         print(file_name + ' downloaded.')
+
+    return count
 
 
 if __name__ == '__main__':
