@@ -71,7 +71,7 @@ def get_json_contains_url(jpg_script_tag):
 def download_imgs(keyword, img_urls, dest_path):
     num_of_imgs = 0
     for i, url in enumerate(img_urls):
-        file_name = keyword + '_' + str(i) + '.jpg'
+        file_name = f'{keyword}_{i}.jpg'
         path = dest_path / file_name
         img = requests.get(url)
 
