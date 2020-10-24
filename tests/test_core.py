@@ -69,7 +69,7 @@ class GetImagesTest(unittest.TestCase):
             if not pathlib.Path(dest_path / f'{KEYWORD}_{i}.jpg').exists():
                 is_all_img_exist = False
 
-        self.assertEqual(True, is_all_img_exist)
+        self.assertEqual(is_all_img_exist, True)
 
 
 if __name__ == '__main__':
