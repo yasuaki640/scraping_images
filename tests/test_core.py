@@ -61,7 +61,8 @@ class GetImagesTest(unittest.TestCase):
 
     def test_download_imgs(self):
         from scrape.core import download_imgs
-        download_imgs(KEYWORD, data.img_urls)
+        dest_path = pathlib.Path(self.img_dir.name)
+        download_imgs(KEYWORD, data.img_urls, dest_path)
 
 
 if __name__ == '__main__':
