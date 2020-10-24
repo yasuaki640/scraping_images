@@ -33,7 +33,7 @@ class GetImagesTest(unittest.TestCase):
             if not tag.__contains__('.jpg'):
                 contain_jpg = False
 
-        self.assertTrue(contain_jpg)
+        self.assertEqual(contain_jpg, True)
 
     def test_get_json_contains_url_given_json_as_param(self):
         from scrape.core import get_json_contains_url
