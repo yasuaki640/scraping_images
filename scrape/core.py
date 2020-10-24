@@ -1,7 +1,5 @@
 import json
 import re
-import sys
-import traceback
 import requests
 from bs4 import BeautifulSoup
 
