@@ -69,6 +69,9 @@ def get_json_contains_url(jpg_script_tag):
 
 
 def download_imgs(keyword, img_urls, dest_path):
+    if not dest_path.exists():
+        dest_path.mkdir()
+
     num_of_imgs = 0
     for i, url in enumerate(img_urls):
         file_name = f'{keyword}_{i}.jpg'
