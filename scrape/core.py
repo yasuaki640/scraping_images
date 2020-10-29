@@ -25,7 +25,7 @@ def main():
     img_url_json = get_json_contains_url(jpg_script_tags)
     img_urls = extract_str(img_url_json, '"display_url": "', '",')
 
-    PATH_TO_DEST = pathlib.Path('../img/')
+    PATH_TO_DEST = pathlib.Path('../img')
     count = download_imgs(keyword, img_urls, PATH_TO_DEST)
     print(str(count) + ' images downloaded')
 
